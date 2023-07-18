@@ -10,12 +10,14 @@ function getLocation(weatherData) {
 function getLocalTime(weatherData) {
   const datetime = new Date(weatherData.location.localtime);
   const date = datetime.toLocaleDateString(undefined, {
-    weekday: 'long',
-    year: 'numeric',
+    weekday: 'short',
     month: 'long',
     day: 'numeric',
   });
-  const time = datetime.toLocaleTimeString();
+  const time = datetime.toLocaleTimeString(undefined, {
+    hour: 'numeric',
+    minute: 'numeric',
+  });
 
   return { date, time };
 }
@@ -43,29 +45,38 @@ async function getLowHighData(city = 'calgary') {
   return lowHighTemp;
 }
 
-getCurrentWeatherData().then((data) => {
-  const weatherData = data;
-  console.log(weatherData);
+const searchSubmit = document.getElementById('search-submit');
+searchSubmit.addEventListener('click', getCityWeather);
 
-  const cityName = document.getElementById('city-name');
-  const currentTime = document.getElementById('current-time');
-  const currentDate = document.getElementById('current-date');
-  const currentTemp = document.getElementById('current-temp');
-  const currentCondition = document.getElementById('current-condition');
+function getCityWeather() {
+  const city = document.getElementById('search').value;
 
-  const location = getLocation(weatherData);
-  const localTime = getLocalTime(weatherData);
+  getCurrentWeatherData(city).then((data) => {
+    const weatherData = data;
+    console.log(weatherData);
 
-  cityName.textContent = `${location.city}, ${location.country}`;
-  currentTime.textContent = `${localTime.time}`;
-  currentDate.textContent = `${localTime.date}`;
-  currentTemp.textContent = `${weatherData.current.temp_c} °C`;
-  currentCondition.textContent = `${weatherData.current.condition.text}`;
-});
+    const cityName = document.getElementById('city-name');
+    const currentTime = document.getElementById('current-time');
+    const currentDate = document.getElementById('current-date');
+    const currentTemp = document.getElementById('current-temp');
+    const currentCondition = document.getElementById('current-condition');
 
-getLowHighData().then((data) => {
-  console.log(data);
+    const location = getLocation(weatherData);
+    const localTime = getLocalTime(weatherData);
 
-  const lowHighTemp = document.getElementById('low-high-temp');
-  lowHighTemp.textContent = `L: ${data.lowTemp}, H: ${data.highTemp}`;
-});
+    cityName.textContent = `${location.city}, ${location.country}`;
+    currentTime.textContent = `${localTime.time}`;
+    currentDate.textContent = `${localTime.date}`;
+    currentTemp.textContent = `${weatherData.current.temp_c} °C`;
+    currentCondition.textContent = `${weatherData.current.condition.text}`;
+  });
+
+  getLowHighData(city).then((data) => {
+    console.log(data);
+
+    const lowHighTemp = document.getElementById('low-high-temp');
+    lowHighTemp.textContent = `L: ${data.lowTemp}, H: ${data.highTemp}`;
+  });
+}
+
+getCityWeather();
