@@ -29,6 +29,20 @@ async function getCurrentWeatherData(city = 'calgary') {
   return weatherData;
 }
 
+async function getLowHighData(city = 'calgary') {
+  const response = await fetch(
+    `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=7`,
+  );
+
+  const forecastData = await response.json();
+  const lowHighTemp = {
+    lowTemp: forecastData.forecast.forecastday[0].day.mintemp_c,
+    highTemp: forecastData.forecast.forecastday[0].day.maxtemp_c,
+  };
+
+  return lowHighTemp;
+}
+
 getCurrentWeatherData().then((data) => {
   const weatherData = data;
   console.log(weatherData);
@@ -47,4 +61,11 @@ getCurrentWeatherData().then((data) => {
   currentDate.textContent = `${localTime.date}`;
   currentTemp.textContent = `${weatherData.current.temp_c} °C`;
   currentCondition.textContent = `${weatherData.current.condition.text}`;
+});
+
+getLowHighData().then((data) => {
+  console.log(data);
+
+  const lowHighTemp = document.getElementById('low-high-temp');
+  lowHighTemp.textContent = `L: ${data.lowTemp}, H: ${data.highTemp}`;
 });
