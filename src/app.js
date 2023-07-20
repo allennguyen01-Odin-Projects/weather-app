@@ -10,7 +10,7 @@ function getLocation(weatherData) {
 function getLocalTime(weatherData) {
   const datetime = new Date(weatherData.location.localtime);
   const date = datetime.toLocaleDateString(undefined, {
-    weekday: 'short',
+    weekday: 'long',
     month: 'long',
     day: 'numeric',
   });
@@ -57,6 +57,7 @@ function getCityWeather() {
     const currentDate = document.getElementById('current-date');
     const currentTemp = document.getElementById('current-temp');
     const currentCondition = document.getElementById('current-condition');
+    const conditionIcon = document.getElementById('condition-icon');
 
     const location = getLocation(weatherData);
     const localTime = getLocalTime(weatherData);
@@ -66,6 +67,7 @@ function getCityWeather() {
     currentDate.textContent = `${localTime.date}`;
     currentTemp.textContent = `${weatherData.current.temp_c}°C`;
     currentCondition.textContent = `${weatherData.current.condition.text}`;
+    conditionIcon.src = weatherData.current.condition.icon;
   });
 
   getLowHighData(city).then((data) => {

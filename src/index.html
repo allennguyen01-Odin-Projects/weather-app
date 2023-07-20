@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Weather App</title>
+    <title>iWeather</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href="images/icon.png" />
@@ -14,7 +14,10 @@
     class="flex flex-col items-center justify-center bg-cover text-white font-sf drop-shadow-sm"
     style="background-image: url('./images/sky-clouds.jpg')"
   >
-    <h1 class="text-6xl m-8 font-bold tracking-wider">The Weather App</h1>
+    <div class="flex m-8 items-center">
+      <img src="images/icon.png" class="h-20" />
+      <h1 class="text-6xl ml-8 font-bold tracking-wider">iWeather</h1>
+    </div>
 
     <div id="city-search" class="mt-8 text-black">
       <input
@@ -34,17 +37,20 @@
 
     <div
       id="current"
-      class="flex flex-col items-center m-8 text-2xl gap-2 font-medium"
+      class="flex items-center justify-center m-16 text-2xl gap-12 font-medium"
     >
-      <div class="flex flex-col items-center mb-2">
+      <div class="flex flex-col items-center mb-2 w-60">
         <p id="current-time"></p>
         <p id="current-date"></p>
       </div>
 
-      <p id="city-name" class="text-3xl"></p>
-      <p id="current-temp" class="text-8xl"></p>
+      <div class="flex flex-col items-center">
+        <p id="city-name" class="text-4xl"></p>
+        <p id="current-temp" class="text-8xl"></p>
+      </div>
 
-      <div class="flex flex-col items-center mt-2">
+      <div class="flex flex-col items-center mt-2 w-60">
+        <img id="condition-icon" />
         <p id="current-condition"></p>
         <p id="low-high-temp"></p>
       </div>
