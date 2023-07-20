@@ -45,9 +45,6 @@ async function getLowHighData(city = 'calgary') {
   return lowHighTemp;
 }
 
-const searchSubmit = document.getElementById('search-submit');
-searchSubmit.addEventListener('click', getCityWeather);
-
 function getCityWeather() {
   const city = document.getElementById('search').value;
 
@@ -67,7 +64,7 @@ function getCityWeather() {
     cityName.textContent = `${location.city}, ${location.country}`;
     currentTime.textContent = `${localTime.time}`;
     currentDate.textContent = `${localTime.date}`;
-    currentTemp.textContent = `${weatherData.current.temp_c} °C`;
+    currentTemp.textContent = `${weatherData.current.temp_c}°C`;
     currentCondition.textContent = `${weatherData.current.condition.text}`;
   });
 
@@ -75,8 +72,11 @@ function getCityWeather() {
     console.log(data);
 
     const lowHighTemp = document.getElementById('low-high-temp');
-    lowHighTemp.textContent = `L: ${data.lowTemp}, H: ${data.highTemp}`;
+    lowHighTemp.textContent = `L: ${data.lowTemp}°C, H: ${data.highTemp}°C`;
   });
 }
+
+const searchSubmit = document.getElementById('search-submit');
+searchSubmit.addEventListener('click', getCityWeather);
 
 getCityWeather();

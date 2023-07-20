@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -8,22 +8,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href="images/icon.png" />
     <link rel="stylesheet" href="/dist/output.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <h1 class="text-4xl">The Weather App</h1>
+  <body
+    class="flex flex-col items-center justify-center bg-cover text-white font-sf drop-shadow-sm"
+    style="background-image: url('./images/sky-clouds.jpg')"
+  >
+    <h1 class="text-6xl m-8 font-bold tracking-wider">The Weather App</h1>
 
-    <div id="city-search">
-      <input type="text" name="search" id="search" value="Vancouver" />
-      <button id="search-submit">Search</button>
+    <div id="city-search" class="mt-8 text-black">
+      <input
+        type="text"
+        name="search"
+        id="search"
+        value="Vancouver"
+        class="rounded-lg p-2 w-40"
+      />
+      <button
+        id="search-submit"
+        class="border-4 px-4 py-1 rounded-xl border-white text-white hover:bg-blue-400"
+      >
+        Search
+      </button>
     </div>
 
-    <div id="current">
-      <p id="city-name"></p>
-      <p id="current-time"></p>
-      <p id="current-date"></p>
-      <p id="current-temp"></p>
-      <p id="low-high-temp"></p>
-      <p id="current-condition"></p>
+    <div
+      id="current"
+      class="flex flex-col items-center m-8 text-2xl gap-2 font-medium"
+    >
+      <div class="flex flex-col items-center mb-2">
+        <p id="current-time"></p>
+        <p id="current-date"></p>
+      </div>
+
+      <p id="city-name" class="text-3xl"></p>
+      <p id="current-temp" class="text-8xl"></p>
+
+      <div class="flex flex-col items-center mt-2">
+        <p id="current-condition"></p>
+        <p id="low-high-temp"></p>
+      </div>
     </div>
 
     <script src="app.js" async defer></script>
