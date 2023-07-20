@@ -51,8 +51,6 @@ function getCityWeather() {
   getCurrentWeatherData(city)
     .then((data) => {
       const weatherData = data;
-      console.log(weatherData);
-
       const cityName = document.getElementById('city-name');
       const currentTime = document.getElementById('current-time');
       const currentDate = document.getElementById('current-date');
@@ -75,8 +73,6 @@ function getCityWeather() {
     });
 
   getLowHighData(city).then((data) => {
-    console.log(data);
-
     const lowHighTemp = document.getElementById('low-high-temp');
     lowHighTemp.textContent = `L: ${data.lowTemp}°C, H: ${data.highTemp}°C`;
   });
