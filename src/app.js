@@ -48,27 +48,31 @@ async function getLowHighData(city = 'calgary') {
 function getCityWeather() {
   const city = document.getElementById('search').value;
 
-  getCurrentWeatherData(city).then((data) => {
-    const weatherData = data;
-    console.log(weatherData);
+  getCurrentWeatherData(city)
+    .then((data) => {
+      const weatherData = data;
+      console.log(weatherData);
 
-    const cityName = document.getElementById('city-name');
-    const currentTime = document.getElementById('current-time');
-    const currentDate = document.getElementById('current-date');
-    const currentTemp = document.getElementById('current-temp');
-    const currentCondition = document.getElementById('current-condition');
-    const conditionIcon = document.getElementById('condition-icon');
+      const cityName = document.getElementById('city-name');
+      const currentTime = document.getElementById('current-time');
+      const currentDate = document.getElementById('current-date');
+      const currentTemp = document.getElementById('current-temp');
+      const currentCondition = document.getElementById('current-condition');
+      const conditionIcon = document.getElementById('condition-icon');
 
-    const location = getLocation(weatherData);
-    const localTime = getLocalTime(weatherData);
+      const location = getLocation(weatherData);
+      const localTime = getLocalTime(weatherData);
 
-    cityName.textContent = `${location.city}, ${location.country}`;
-    currentTime.textContent = `${localTime.time}`;
-    currentDate.textContent = `${localTime.date}`;
-    currentTemp.textContent = `${weatherData.current.temp_c}°C`;
-    currentCondition.textContent = `${weatherData.current.condition.text}`;
-    conditionIcon.src = weatherData.current.condition.icon;
-  });
+      cityName.textContent = `${location.city}, ${location.country}`;
+      currentTime.textContent = `${localTime.time}`;
+      currentDate.textContent = `${localTime.date}`;
+      currentTemp.textContent = `${weatherData.current.temp_c}°C`;
+      currentCondition.textContent = `${weatherData.current.condition.text}`;
+      conditionIcon.src = weatherData.current.condition.icon;
+    })
+    .catch(() => {
+      alert(`City "${city}" is not a valid city. Try again.`);
+    });
 
   getLowHighData(city).then((data) => {
     console.log(data);
@@ -80,5 +84,12 @@ function getCityWeather() {
 
 const searchSubmit = document.getElementById('search-submit');
 searchSubmit.addEventListener('click', getCityWeather);
+
+const citySearch = document.getElementById('search');
+citySearch.addEventListener('keypress', (event) => {
+  if (event.key === 'Enter') {
+    getCityWeather();
+  }
+});
 
 getCityWeather();
