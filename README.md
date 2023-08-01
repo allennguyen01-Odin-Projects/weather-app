@@ -1,6 +1,6 @@
 # weather-app
 
-4th project in JavaScript path of The Odin Project.
+5th project in JavaScript path of The Odin Project.
 
 Live Demo: https://allennguyen01-odin-projects.github.io/weather-app/
 
